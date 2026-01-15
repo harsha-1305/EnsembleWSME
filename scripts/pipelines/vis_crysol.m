@@ -1,4 +1,4 @@
-function [x, y] = vis_crysol(pname)
+function [x_fit, y_fit] = vis_crysol(pname)
     clf('reset')
     hold on
     foldername = "..\results\microstates\";
@@ -31,6 +31,8 @@ function [x, y] = vis_crysol(pname)
     y_exp = y_exp(1:c);
     y_err = y_err(1:c);
 
+    [x_fit, y_fit] = clean_x_y(x, y, x_exp, y_exp, y_err);
+
     lgd = [];
     p1 = errorbar(x_exp, y_exp, y_err, 'o');
     p1.DataTipTemplate.DataTipRows(end+1) = dataTipTextRow('Series', repmat({"Experimental"}, size(p1.XData)));
@@ -40,7 +42,6 @@ function [x, y] = vis_crysol(pname)
     ylabel("I(q).q^2")
     yscale log
 
-    [x_fit, y_fit] = clean_x_y(x, y, x_exp, y_exp, y_err);
     p1 = plot(x_fit, y_fit);
     p1.DataTipTemplate.DataTipRows(end+1) = dataTipTextRow('Series', repmat("Predicted", size(p1.XData)));
     lgd = [lgd "Predicted"];
