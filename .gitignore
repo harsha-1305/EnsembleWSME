@@ -1,0 +1,9 @@
+# MATLAB autosave and temp files
+*.asv
+*.mex*
+*.p
+*.log
+
+# Data and results
+data/
+results/
